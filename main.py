@@ -27,14 +27,20 @@ level = [
 WIN_WIDTH, WIN_HEIGHT = 780, 630
 BG_COLOR = (192, 192, 192)
 BRICK_WIDHT = BRICK_HEIGHT = 30
-BRICK_COLOR = (0 ,128,0)
+BRICK_COLOR = (0, 128, 0)
+FPS = 60
+clock = pygame.time.Clock()
+x1, y1 = WIN_WIDTH // 2, WIN_HEIGHT // 2
+PLAYER_SIZE, PLAYER_SIZE = 50, 50
 
 pygame.init()
 pygame.display.set_caption('первая игра')
 screen = pygame.display.set_mode((WIN_WIDTH, WIN_HEIGHT))
 
-brick = pygame.Surface((BRICK_WIDHT, BRICK_HEIGHT))
-brick.fill(BRICK_COLOR)
+
+player = pygame.Surface((PLAYER_SIZE, PLAYER_SIZE))
+player.set_colorkey((0, 0, 0))
+#brick.fill(BRICK_COLOR)
 
 run = True
 while run:
@@ -49,10 +55,13 @@ while run:
     for row in level:
         for col in row:
             if col == '-':
-                screen.blit( brick,( x, y ))
+                # screen.blit(brick, (x, y))
+                brick = pygame.draw.rect(screen, BRICK_COLOR, [x, y, BRICK_WIDHT, BRICK_HEIGHT])
+                pygame.draw.rect(screen, (255, 128, 0), [x, y, BRICK_WIDHT, BRICK_HEIGHT], 2)
             x += BRICK_WIDHT
         y += BRICK_HEIGHT
         x = 0
 
+    screen.blit(player, (x1, y1))
+    pygame.display.set_caption(f'FPS:{int(clock.get_fps())}')
     pygame.display.update()
-
