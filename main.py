@@ -31,7 +31,7 @@ BRICK_COLOR = (0, 128, 0)
 FPS = 60
 clock = pygame.time.Clock()
 PLAYER_SIZE, PLAYER_SIZE = 40, 40
-BG_SPEED = 0.3
+BG_SPEED = 1
 dx = 0
 
 pygame.init()
@@ -51,16 +51,16 @@ while run:
     for e in pygame.event.get():
         if e.type == pygame.QUIT or e.type == pygame.KEYDOWN and e.key == pygame.K_ESCAPE:
             run = False
-    
+
     keys = pygame. key. get_pressed()
     if keys[pygame.K_RIGHT]:
         player_rect.x += 3
     if keys[pygame.K_LEFT]:
-        player_rect.x -= 3    
+        player_rect.x -= 3
     if keys[pygame.K_UP]:
         player_rect.y -= 3
     if keys[pygame.K_DOWN]:
-        player_rect.y += 3  
+        player_rect.y += 3
 
     screen.fill(BG_COLOR)
 
