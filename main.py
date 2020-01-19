@@ -35,12 +35,12 @@ PLAYER_SIZE, PLAYER_SIZE = 40, 40
 BG_SPEED = 1
 dx = 0
 PLAER_SPEED = 3
-penalty = 0
+penalty = 0.0
+BTN_W, BTN_H = 220, 60
 RED = (255, 0, 0)
 
 pygame.init()
 screen = pygame.display.set_mode((WIN_WIDTH, WIN_HEIGHT))
-
 
 player = pygame.Surface((PLAYER_SIZE, PLAYER_SIZE))
 player.set_colorkey((0, 0, 0))
@@ -51,6 +51,12 @@ pygame.draw.arc(player, (255, 0, 0), (8, 12, 24, 20), 3.6, 6.0)
 player_rect = player.get_rect(center=(WIN_WIDTH // 2, WIN_HEIGHT // 2))
 
 text = pygame.font.SysFont('Arial', 22, True, False)
+text_xy = ((WIN_WIDTH - text.size(f'Штрафных очков {round(penalty, 1)}')[0]) // 2, 30)
+
+btn = pygame.Surface((BTN_W, BTN_H))
+text1 = 'Играть снова?'
+text1_pos = text.size(text1)
+print(text1_pos)
 
 run = True
 while run:
@@ -70,6 +76,11 @@ while run:
 
     screen.fill(BG_COLOR)
 
+    if dx > -WIN_WIDTH * 4:
+        dx -= BG_SPEED
+    else:
+        if player_rect.x < WIN_WIDTH - PLAYER_SIZE:
+            player_rect.x += PLAER_SPEED
     dx -= BG_SPEED
     x = dx
     y = 0
@@ -86,9 +97,9 @@ while run:
         x = dx
 
     screen.blit(player, (player_rect))
-    pygame.display.set_caption(f'FPS:{int(clock.get_fps())}')
     screen.blit(
-        text.render(f'Штрафных очков {round(penalty, 1)}', True, RED, (50, 50, 50)),
-        (WIN_WIDTH - text.size(f'Штрафных очков {round(penalty, 1)}')[0] - 5, 5))
+        text.render(f'Штрафных очков {round(penalty, 1)}', True, RED, (50, 50, 50)), text_xy)
+
+    pygame.display.set_caption(f'FPS:{int(clock.get_fps())}')
     pygame.display.update()
     clock.tick(FPS)
