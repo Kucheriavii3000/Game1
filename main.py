@@ -1,4 +1,5 @@
 import pygame
+from pygame import gfxdraw
 
 level = [
     '--------------------------------------------------------------------------------------------------------',
@@ -37,9 +38,9 @@ dx = 0
 PLAER_SPEED = 3
 penalty = 0.0
 BTN_W, BTN_H = 220, 60
-RED = (255, 0, 0, 130)
+RED = (255, 0, 0)
 GOLD = (255, 215, 0)
-BLUE = (0, 0, 255, 130)
+BLUE = (0, 0, 250)
 
 pygame.init()
 screen = pygame.display.set_mode((WIN_WIDTH, WIN_HEIGHT))
@@ -51,8 +52,11 @@ player = pygame.Surface((PLAYER_SIZE, PLAYER_SIZE), pygame.SRCALPHA)
 
 def face(color):
     pygame.draw.circle(player, color, (PLAYER_SIZE // 2, PLAYER_SIZE // 2), PLAYER_SIZE // 2)
+    pygame.gfxdraw.aacircle(player, PLAYER_SIZE // 2, PLAYER_SIZE // 2, PLAYER_SIZE // 2, color)
     pygame.draw.circle(player, GOLD, (12, 15), 4)
+    pygame.gfxdraw.aacircle(player, 12, 15, 4, GOLD)
     pygame.draw.circle(player, GOLD, (28, 15), 4)
+    pygame.gfxdraw.aacircle(player, 28, 15, 4, GOLD)
     pygame.draw.arc(player, GOLD, (8, 12, 24, 20), 3.6, 6.0)
 
 
