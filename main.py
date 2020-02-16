@@ -46,18 +46,18 @@ pygame.init()
 screen = pygame.display.set_mode((WIN_WIDTH, WIN_HEIGHT))
 pygame.display.set_caption('первая игра')
 
-player = pygame.Surface((PLAYER_SIZE, PLAYER_SIZE), pygame.SRCALPHA)
+player = pygame.Surface((PLAYER_SIZE + 1, PLAYER_SIZE + 1), pygame.SRCALPHA)
 # player.set_colorkey((0, 0, 0))
 
 
 def face(color):
-    pygame.draw.circle(player, color, (PLAYER_SIZE // 2, PLAYER_SIZE // 2), PLAYER_SIZE // 2)
     pygame.gfxdraw.aacircle(player, PLAYER_SIZE // 2, PLAYER_SIZE // 2, PLAYER_SIZE // 2, color)
-    pygame.draw.circle(player, GOLD, (12, 15), 4)
+    pygame.gfxdraw.filled_circle(player, PLAYER_SIZE // 2, PLAYER_SIZE // 2, PLAYER_SIZE // 2, color)
     pygame.gfxdraw.aacircle(player, 12, 15, 4, GOLD)
-    pygame.draw.circle(player, GOLD, (28, 15), 4)
+    pygame.gfxdraw.filled_circle(player, 12, 15, 4, GOLD)
     pygame.gfxdraw.aacircle(player, 28, 15, 4, GOLD)
-    pygame.draw.arc(player, GOLD, (8, 12, 24, 20), 3.6, 6.0)
+    pygame.gfxdraw.filled_circle(player, 28, 15, 4, GOLD)
+    pygame.gfxdraw.arc(player, PLAYER_SIZE // 2, PLAYER_SIZE // 2, PLAYER_SIZE // 3, 30, 150, GOLD)
 
 
 player_rect = player.get_rect(center=(WIN_WIDTH // 2, WIN_HEIGHT // 2))
